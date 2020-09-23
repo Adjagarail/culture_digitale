@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Theme;
+use App\Form\SousthemeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ThemeType extends AbstractType
 {

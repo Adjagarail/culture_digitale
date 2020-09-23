@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Soustheme;
 use App\Form\SousthemeType;
 use App\Repository\SousthemeRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/soustheme")
@@ -18,10 +19,19 @@ class SousthemeController extends AbstractController
     /**
      * @Route("/", name="soustheme_index", methods={"GET"})
      */
-    public function index(SousthemeRepository $sousthemeRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
+        $donnees = $this->getDoctrine()->getRepository(Soustheme::class)->findAll();
+
+        $soustheme = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            10 // Nombre de résultats par page
+        );
+
         return $this->render('soustheme/index.html.twig', [
-            'sousthemes' => $sousthemeRepository->findAll(),
+            'sousthemes' => $soustheme,
         ]);
     }
 

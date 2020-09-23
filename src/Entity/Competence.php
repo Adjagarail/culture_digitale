@@ -20,7 +20,7 @@ class Competence
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Image;
 
@@ -97,5 +97,9 @@ class Competence
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->Nom;
     }
 }

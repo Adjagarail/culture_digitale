@@ -25,7 +25,7 @@ class Theme
     private $Nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Soustheme::class, mappedBy="theme")
+     * @ORM\OneToMany(targetEntity=Soustheme::class, mappedBy="theme", cascade={"persist"})
      */
     private $Sousthemes;
 
@@ -97,5 +97,9 @@ class Theme
         $this->competence = $competence;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->Nom;
     }
 }

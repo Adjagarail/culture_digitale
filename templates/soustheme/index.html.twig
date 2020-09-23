@@ -5,31 +5,34 @@
 {% block body %}
     <h1>Soustheme index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for soustheme in sousthemes %}
-            <tr>
-                <td>{{ soustheme.id }}</td>
-                <td>{{ soustheme.Nom }}</td>
-                <td>
-                    <a href="{{ path('soustheme_show', {'id': soustheme.id}) }}">show</a>
-                    <a href="{{ path('soustheme_edit', {'id': soustheme.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('soustheme_new') }}">Create new</a>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Theme</th>
+      <th scope="col">Sous Theme</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for soustheme in sousthemes %}
+    <tr>
+      <th scope="row">{{ soustheme.id }}</th>
+      <td>{{ soustheme.theme }}</td>
+      <td>{{ soustheme.Nom }}</td>
+      <td>
+        <a type="button" class="btn btn-success" href="{{ path('soustheme_show', {'id': soustheme.id}) }}"><i class="fa fa-eye"></i> Voir </a>
+        <a type="button" class="btn btn-warning" href="{{ path('soustheme_edit', {'id': soustheme.id}) }}"><i class="fa fa-edit"></i> Modifier </a>
+        <a> {{ include('soustheme/_delete_form.html.twig') }} </a>
+      </td>
+    </tr>
+     {% else %}
+        <tr>
+        <td colspan="3"> No Records Found </td>
+        </tr>
+     {% endfor %}
+  </tbody>
+</table>
+    {{ knp_pagination_render(sousthemes) }}
+    <a type="button" class="btn btn-success" href="{{ path('soustheme_new') }}"><i class="fa fa-plus"></i> Ajouter </a>
 {% endblock %}
