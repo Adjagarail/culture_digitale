@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Soustheme index{% endblock %}
+
+{% block body %}
+    <h1>Soustheme index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for soustheme in sousthemes %}
+            <tr>
+                <td>{{ soustheme.id }}</td>
+                <td>{{ soustheme.Nom }}</td>
+                <td>
+                    <a href="{{ path('soustheme_show', {'id': soustheme.id}) }}">show</a>
+                    <a href="{{ path('soustheme_edit', {'id': soustheme.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('soustheme_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Soustheme{% endblock %}
+
+{% block body %}
+    <h1>Edit Soustheme</h1>
+
+    {{ include('soustheme/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('soustheme_index') }}">back to list</a>
+
+    {{ include('soustheme/_delete_form.html.twig') }}
+{% endblock %}
